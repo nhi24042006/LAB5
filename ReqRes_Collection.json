@@ -321,7 +321,7 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"Status code is 404\", () => pm.response.to.have.status(404));\r\n\r\npm.test(\"Body phản hồi là object rỗng {}\", () => {\r\n    pm.expect(pm.response.json()).to.eql({});\r\n});"
+                  "pm.test(\"Status code is 404\", function () {\r\n    pm.response.to.have.status(404);\r\n});\r\n\r\npm.test(\"Body phản hồi là object rỗng\", function () {\r\n    pm.expect(pm.response.text()).to.equal(\"{}\");\r\n});"
                 ]
               }
             }
