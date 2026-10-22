@@ -15,7 +15,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
       - name: Install Newman & Reporter
         run: npm install -g newman newman-reporter-htmlextra
@@ -25,6 +25,7 @@ jobs:
           newman run ReqRes_Collection.json \
           -e ReqRes_Environment.json \
           -d users.csv \
+          --delay-request 500 \
           --reporters cli,htmlextra \
           --reporter-htmlextra-export report.html
           
