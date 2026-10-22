@@ -3,8 +3,7 @@
     "_postman_id": "eba9946c-a056-49c3-8265-363281569790",
     "name": "2474802010285_PhamThiNhi_ReqRes",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "59052108",
-    "_collection_link": "https://go.postman.co/collection/59052108-eba9946c-a056-49c3-8265-363281569790?source=collection_link"
+    "_exporter_id": "59052108"
   },
   "item": [
     {
@@ -18,32 +17,28 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));\r\n\r\npm.test(\"Token exists\", () => {\r\n    pm.expect(pm.response.json()).to.have.property(\"token\");\r\n});\r\n\r\npm.environment.set(\"userToken\", pm.response.json().token);"
+                  "pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));",
+                  "",
+                  "pm.test(\"Token exists\", () => {",
+                  "    pm.expect(pm.response.json()).to.have.property(\"token\");",
+                  "});",
+                  "",
+                  "pm.environment.set(\"userToken\", pm.response.json().token);"
                 ]
               }
             }
           ],
           "request": {
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-api-key",
-                  "type": "string"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}",
-                  "type": "string"
-                }
-              ]
-            },
             "method": "POST",
-            "header": [],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n \"email\": \"eve.holt@reqres.in\",\r\n \"password\": \"pistol\"\r\n}",
+              "raw": "{\n  \"email\": \"eve.holt@reqres.in\",\n  \"password\": \"pistol\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -71,7 +66,19 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"Status code is 201\", () => pm.response.to.have.status(201));\r\n\r\nconst res = pm.response.json();\r\n\r\npm.test(\"name khớp dữ liệu CSV\", () => {\r\n    pm.expect(res.name).to.eql(pm.iterationData.get(\"name\"));\r\n});\r\n\r\npm.test(\"job khớp dữ liệu CSV\", () => {\r\n    pm.expect(res.job).to.eql(pm.iterationData.get(\"job\"));\r\n});\r\n\r\npm.environment.set(\"userId\", res.id);"
+                  "pm.test(\"Status code is 201\", () => pm.response.to.have.status(201));",
+                  "",
+                  "const res = pm.response.json();",
+                  "",
+                  "pm.test(\"name khớp dữ liệu CSV\", () => {",
+                  "    pm.expect(res.name).to.eql(pm.iterationData.get(\"name\"));",
+                  "});",
+                  "",
+                  "pm.test(\"job khớp dữ liệu CSV\", () => {",
+                  "    pm.expect(res.job).to.eql(pm.iterationData.get(\"job\"));",
+                  "});",
+                  "",
+                  "pm.environment.set(\"userId\", res.id);"
                 ]
               }
             }
@@ -80,25 +87,22 @@
             "method": "POST",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{userToken}}"
+                "key": "Content-Type",
+                "value": "application/json"
               },
               {
-                "key": "x-api-key",
-                "value": "{{apiKey}}"
+                "key": "Authorization",
+                "value": "Bearer {{userToken}}"
               }
             ],
             "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "file",
-                  "type": "file",
-                  "src": [
-                    "y5jkdbjXx/users.csv"
-                  ]
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"{{name}}\",\n  \"job\": \"{{job}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
                 }
-              ]
+              }
             },
             "url": {
               "raw": "{{baseUrl}}/api/users",
@@ -121,7 +125,18 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));\r\n\r\nconst res = pm.response.json();\r\n\r\npm.test(\"data.id bằng 2\", () => {\r\n    pm.expect(res.data.id).to.eql(2);\r\n});\r\n\r\npm.test(\"data.email có đuôi @reqres.in\", () => {\r\n    pm.expect(res.data.email).to.be.a(\"string\");\r\n    pm.expect(res.data.email.endsWith(\"@reqres.in\")).to.be.true;\r\n});"
+                  "pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));",
+                  "",
+                  "const res = pm.response.json();",
+                  "",
+                  "pm.test(\"data.id bằng 2\", () => {",
+                  "    pm.expect(res.data.id).to.eql(2);",
+                  "});",
+                  "",
+                  "pm.test(\"data.email có đuôi @reqres.in\", () => {",
+                  "    pm.expect(res.data.email).to.be.a(\"string\");",
+                  "    pm.expect(res.data.email.endsWith(\"@reqres.in\")).to.be.true;",
+                  "});"
                 ]
               }
             }
@@ -151,7 +166,11 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));\r\n\r\npm.test(\"updatedAt tồn tại trong response\", () => {\r\n    pm.expect(pm.response.json()).to.have.property(\"updatedAt\");\r\n});"
+                  "pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));",
+                  "",
+                  "pm.test(\"updatedAt tồn tại trong response\", () => {",
+                  "    pm.expect(pm.response.json()).to.have.property(\"updatedAt\");",
+                  "});"
                 ]
               }
             }
@@ -160,13 +179,13 @@
             "method": "PUT",
             "header": [
               {
-                "key": "x-api-key",
-                "value": "{{apiKey}}"
+                "key": "Content-Type",
+                "value": "application/json"
               }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n \"name\": \"An Nguyen Updated\",\r\n \"job\": \"QA Manager\"\r\n}\r\n",
+              "raw": "{\n  \"name\": \"An Nguyen Updated\",\n  \"job\": \"QA Manager\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -217,22 +236,7 @@
           },
           "response": []
         }
-      ],
-      "auth": {
-        "type": "apikey",
-        "apikey": [
-          {
-            "key": "key",
-            "value": "x-api-key",
-            "type": "string"
-          },
-          {
-            "key": "value",
-            "value": "{{apiKey}}",
-            "type": "string"
-          }
-        ]
-      }
+      ]
     },
     {
       "name": "Negative_Cases (Xử lý lỗi hệ thống)",
@@ -245,17 +249,26 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"Status code is 400\", () => pm.response.to.have.status(400));\r\n\r\npm.test(\"Thông báo lỗi là Missing password\", () => {\r\n    pm.expect(pm.response.json().error).to.eql(\"Missing password\");\r\n});"
+                  "pm.test(\"Status code is 400\", () => pm.response.to.have.status(400));",
+                  "",
+                  "pm.test(\"Thông báo lỗi là Missing password\", () => {",
+                  "    pm.expect(pm.response.json().error).to.eql(\"Missing password\");",
+                  "});"
                 ]
               }
             }
           ],
           "request": {
             "method": "POST",
-            "header": [],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"email\": \"sydney@fife\"\r\n}",
+              "raw": "{\n  \"email\": \"sydney@fife\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -283,17 +296,26 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"Status code is 400\", () => pm.response.to.have.status(400));\r\n\r\npm.test(\"Thông báo lỗi là Missing email or username\", () => {\r\n    pm.expect(pm.response.json().error).to.eql(\"Missing email or username\");\r\n});"
+                  "pm.test(\"Status code is 400\", () => pm.response.to.have.status(400));",
+                  "",
+                  "pm.test(\"Thông báo lỗi là Missing email or username\", () => {",
+                  "    pm.expect(pm.response.json().error).to.eql(\"Missing email or username\");",
+                  "});"
                 ]
               }
             }
           ],
           "request": {
             "method": "POST",
-            "header": [],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
-              "raw": "{ }",
+              "raw": "{}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -321,7 +343,11 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"Status code is 404\", function () {\r\n    pm.response.to.have.status(404);\r\n});\r\n\r\npm.test(\"Body phản hồi là object rỗng\", function () {\r\n    pm.expect(pm.response.text()).to.equal(\"{}\");\r\n});"
+                  "pm.test(\"Status code is 404\", () => pm.response.to.have.status(404));",
+                  "",
+                  "pm.test(\"Body phản hồi là object rỗng\", () => {",
+                  "    pm.expect(pm.response.json()).to.eql({});",
+                  "});"
                 ]
               }
             }
@@ -343,22 +369,7 @@
           },
           "response": []
         }
-      ],
-      "auth": {
-        "type": "apikey",
-        "apikey": [
-          {
-            "key": "key",
-            "value": "x-api-key",
-            "type": "string"
-          },
-          {
-            "key": "value",
-            "value": "{{apiKey}}",
-            "type": "string"
-          }
-        ]
-      }
+      ]
     }
   ],
   "auth": {
